@@ -26,7 +26,11 @@ fn main() {
 
     let mut results: Vec<u128> = vec![];
     for handle in handles {
-        // TODO: a struct is returned from thread::spawn, can you use it?
+        let duration = handle.join();
+        match duration {
+            Ok(r) => results.push(r),
+            Err(_) => println!("Cannot handle thread"),
+        }
     }
 
     if results.len() != 10 {
